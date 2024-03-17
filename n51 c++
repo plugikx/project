@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    float dlina, shirina, ploshad;
+    
+    cout <<"Vvedite dliny: ";
+    cin >> dlina;
+    
+    cout <<"Vedite shiriny: ";
+    cin >> shirina;
+   
+    ploshad = dlina * shirina;
+    
+    cout <<"Ploshad: " << ploshad << " кв.см" <<endl;
+    return 0;
+}
