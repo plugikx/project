@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int year, yearv;
+    
+    cout <<"Vvedite god: ";
+    cin >> year;
+    yearv = year % 4;
+    
+    if (yearv)
+    
+    cout <<"God ne visokosnyi" << endl;
+    
+    else 
+    cout <<"God visokosnyi" << endl;
+    
+    return 0;
+}
