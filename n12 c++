@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    float couter, couter1;
+    
+    cout << "Vvedite couter: ";
+    cin >> couter;
+    
+    couter1 = couter / 2;
+    cout << "couter/2 = " << couter1 << endl;
+    
+    return 0;
+}
+
