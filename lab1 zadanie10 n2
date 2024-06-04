@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+const double e = 1e-6;
+
+// Уравнение
+double f(double x) {
+return x * exp(x) - x - 1;
+}
+
+// Метод дихотомии
+double dichotomyMethod(double a, double b) {
+double left = a;
+double right = b;
+while ((right - left) > e) {
+double mid = (left + right) / 2.0;
+if (f(left) * f(mid) <= 0) {
+right = mid;
+} else {
+left = mid;
+}
+}
+return (left + right) / 2.0;
+}
+
+// Метод итераций (простая итерация)
+double iterationMethod(double x0) {
+double x = x0;
+double x_prev;
+do {
+x_prev = x;
+x = x - f(x);
+} while (abs(x - x_prev) > e);
+return x;
+}
+
+// Метод хорд
+double chordMethod(double a, double b) {
+double x0;
+do {
+x0 = b - (f(b) * (b - a)) / (f(b) - f(a));
+a = b;
+b = x0;
+} while (abs(f(x0)) > e);
+return x0;
+}
+
+// Метод Ньютона
+double newtonMethod(double x0) {
+double x = x0;
+do {
+x0 = x;
+x = x0 - f(x0) / (1 + x0);
+} while (abs(x - x0) > e);
+return x;
+}
+
+int main() {
+double a = -1.0;
+double b = 1.0;
+
+double dichotomyRoot = dichotomyMethod(a, b);
+double iterationRoot = iterationMethod(0.0);
+double chordRoot = chordMethod(a, b);
+double newtonRoot = newtonMethod(0.0);
+
+cout << "Корень методом дихотомии: " << dichotomyRoot << endl;
+cout << "Корень методом итераций: " << iterationRoot << endl;
+cout << "Корень методом хорд: " << chordRoot << endl;
+cout << "Корень методом Ньютона: " << newtonRoot << endl;
+
+return 0;
+}
