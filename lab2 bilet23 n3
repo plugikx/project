@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+using namespace std;
+
+// Определим структуру для представления уравнения гиперболы
+struct Hyperbola {
+    double a;  // Коэффициент x^2
+    double b;  // Коэффициент y^2
+    double c;  // Свободный коэффициент
+};
+
+// Определим структуру для представления точки
+struct Point {
+    double x;  // Координата x
+    double y;  // Координата y
+};
+
+// Создадим функцию для генерации случайного коэффициента
+double randomCoefficient() {
+    // Вернем случайное число от -10 до 10
+    return -10 + (rand() % 21) / 10.0;
+}
+
+// Создадим функцию для проверки принадлежности точки гиперболе
+bool pointOnHyperbola(const Hyperbola& hyperbola, const Point& point) {
+    // Проверим уравнение гиперболы
+    return hyperbola.a * point.x * point.x - hyperbola.b * point.y * point.y == hyperbola.c;
+}
+
+// Создадим функцию для нахождения координат фокусов
+void findFoci(const Hyperbola& hyperbola, Point& focus1, Point& focus2) {
+    // Вычислим координаты фокусов
+    focus1.x = 0;
+    focus1.y = sqrt(hyperbola.c / hyperbola.b);
+    focus2.x = 0;
+    focus2.y = -sqrt(hyperbola.c / hyperbola.b);
+}
+
+// Создадим функцию для нахождения длины действительной полуоси
+double findRealSemiAxis(const Hyperbola& hyperbola) {
+    // Вычислим длину действительной полуоси
+    return sqrt(hyperbola.c / hyperbola.a);
+}
+
+// Создадим функцию для нахождения длины мнимой полуоси
+double findImaginarySemiAxis(const Hyperbola& hyperbola) {
+    // Вычислим длину мнимой полуоси
+    return sqrt(hyperbola.c / hyperbola.b);
+}
+
+// Создадим функцию для нахождения эксцентриситета
+double findEccentricity(const Hyperbola& hyperbola) {
+    // Вычислим эксцентриситет
+    return sqrt(1 + hyperbola.a / hyperbola.b);
+}
+
+// Создадим функцию для нахождения расстояния между директрисами
+double findDistanceBetweenDirectrices(const Hyperbola& hyperbola) {
+    // Вычислим расстояние между директрисами
+    return 2 * sqrt(hyperbola.c / hyperbola.a);
+}
+
+// Создадим функцию для тестирования программы
+void test() {
+    // Сгенерируем случайные коэффициенты гиперболы
+    Hyperbola hyperbola;
+    hyperbola.a = randomCoefficient();
+    hyperbola.b = randomCoefficient();
+    hyperbola.c = randomCoefficient();
+
+    // Сгенерируем случайную точку
+    Point point;
+    point.x = randomCoefficient();
+    point.y = randomCoefficient();
+
+    // Проверим принадлежность точки гиперболе
+    bool isOnHyperbola = pointOnHyperbola(hyperbola, point);
+
+    // Выведем результаты
+    cout << "Уравнение гиперболы: " << hyperbola.a << "x^2 - " << hyperbola.b << "y^2 = " << hyperbola.c << endl;
+    cout << "Точка: (" << point.x << ", " << point.y << ")" << endl;
+    cout << "Принадлежит ли точка гиперболе: " << (isOnHyperbola ? "Да" : "Нет") << endl;
+
+    // Найдем координаты фокусов
+    Point focus1, focus2;
+    findFoci(hyperbola, focus1, focus2);
+    cout << "Координаты фокусов: (" << focus1.x << ", " << focus1.y << ") и (" << focus2.x << ", " << focus2.y << ")" << endl;
+
+    // Найдем длины полуосей
+    double realSemiAxis = findRealSemiAxis(hyperbola);
+    double imaginarySemiAxis = findImaginarySemiAxis(hyperbola);
+    cout << "Длина действительной полуоси: " << realSemiAxis << endl;
+    cout << "Длина мнимой полуоси: " << imaginarySemiAxis << endl;
+
+    // Найдем эксцентриситет
+    double eccentricity = findEccentricity(hyperbola);
+    cout << "Эксцентриситет: " << eccentricity << endl;
+
+    // Найдем расстояние между директрисами
+    double distanceBetweenDirectrices = findDistanceBetweenDirectrices(hyperbola);
+    cout << "Расстояние между директрисами: " << distanceBetweenDirectrices << endl;
+}
+
+int main() {
+    // Запустим тестирование программы
+    test();
+
+    return 0;
+}
