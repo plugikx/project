@@ -1,17 +1,32 @@
-import numpy as np
+import cmath
 
-# Определим комплексные числа
-z1 = 2 + 1j
-z2 = 2 - 2j
+# Комплексные числа
+z1 = complex(2, 1)
+z2 = complex(2, -2)
+z3 = complex(-1, 2)
 
-# Вычислим сумму, разность, произведение и частное
-sum = z1 + z2
-difference = z1 - z2
-product = z1 * z2
-quotient = z1 / z2
+# Сумма первых двух чисел
+sum_of_two = z1 + z2
 
-# Выведем результаты
-print("Сумма:", sum)
-print("Разность:", difference)
-print("Произведение:", product)
-print("Частное:", quotient)
+# Разность первых двух чисел
+diff_of_two = z1 - z2
+
+# Произведение первых двух чисел
+prod_of_two = z1 * z2
+
+# Частное первых двух чисел
+quotient_of_two = z1 / z2
+
+# Четвертая степень третьего числа
+z3_fourth = pow(z3, 4)
+
+# Корень третьей степени третьего числа
+z3_cube_root = cmath.sqrt(z3)**3
+
+# Вывод результатов
+print("Сумма первых двух чисел:", sum_of_two)
+print("Разность первых двух чисел:", diff_of_two)
+print("Произведение первых двух чисел:", prod_of_two)
+print("Частное первых двух чисел:", quotient_of_two)
+print("Четвертая степень третьего числа:", z3_fourth)
+print("Корень третьей степени третьего числа:", z3_cube_root)
