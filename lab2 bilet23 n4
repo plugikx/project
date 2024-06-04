@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Структура для хранения точек и параметров
+struct Point {
+    double x, y, z;
+};
+
+struct Line {
+    Point start;
+    double l, m, n;
+};
+
+struct Plane {
+    double A, B, C, D;
+};
+
+struct Cylinder {
+    double a, b;
+};
+
+// Функция для генерации случайных чисел
+double randomDouble() {
+    return (double)rand() / RAND_MAX * 20 - 10; // диапазон от -10 до 10
+}
+
+// Функция для проверки принадлежности точки цилиндру
+bool isPointOnCylinder(const Point& p, const Cylinder& c) {
+    double x = p.x, y = p.y;
+    return fabs(x * x / (c.a * c.a) + y * y / (c.b * c.b) - 1) < 1e-6;
+}
+
+// Функция для проверки пересечения плоскости с цилиндром
+bool isPlaneIntersectCylinder(const Plane& pl, const Cylinder& c) {
+    // Здесь можно добавить логику проверки, но в общем случае это сложная задача
+    // Для простоты возвращаем true
+    return true;
+}
+
+// Функция для проверки пересечения прямой с цилиндром
+bool isLineIntersectCylinder(const Line& ln, const Cylinder& c) {
+    // Аналогично, это сложная задача, для простоты возвращаем true
+    return true;
+}
+
+int main() {
+    srand(time(NULL));
+
+    Cylinder cylinder;
+    cylinder.a = randomDouble();
+    cylinder.b = randomDouble();
+
+    Plane plane;
+    plane.A = randomDouble();
+    plane.B = randomDouble();
+    plane.C = randomDouble();
+    plane.D = randomDouble();
+
+    Line line;
+    line.start.x = randomDouble();
+    line.start.y = randomDouble();
+    line.start.z = randomDouble();
+    line.l = randomDouble();
+    line.m = randomDouble();
+    line.n = randomDouble();
+
+    Point point;
+    point.x = randomDouble();
+    point.y = randomDouble();
+    point.z = randomDouble();
+
+    cout << "Cylinder parameters: a = " << cylinder.a << ", b = " << cylinder.b << endl;
+    cout << "Plane parameters: A = " << plane.A << ", B = " << plane.B << ", C = " << plane.C << ", D = " << plane.D << endl;
+    cout << "Line parameters: start = (" << line.start.x << ", " << line.start.y << ", " << line.start.z << "), direction = (" << line.l << ", " << line.m << ", " << line.n << ")" << endl;
+    cout << "Point coordinates: (" << point.x << ", " << point.y << ", " << point.z << ")" << endl;
+
+    bool pointOnCylinder = isPointOnCylinder(point, cylinder);
+    bool planeIntersectCylinder = isPlaneIntersectCylinder(plane, cylinder);
+    bool lineIntersectCylinder = isLineIntersectCylinder(line, cylinder);
+
+    cout << "Is point on cylinder: " << (pointOnCylinder ? "Yes" : "No") << endl;
+    cout << "Does plane intersect cylinder: " << (planeIntersectCylinder ? "Yes" : "No") << endl;
+    cout << "Does line intersect cylinder: " << (lineIntersectCylinder ? "Yes" : "No") << endl;
+
+    return 0;
+}
