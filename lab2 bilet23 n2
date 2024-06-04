@@ -1,0 +1,35 @@
+import math
+import random
+
+vectors = []
+for _ in range(3):
+    vector = (random.randint(-10, 10), random.randint(-10, 10))
+    vectors.append(vector)
+
+lengths = [math.sqrt(vector[0]**2 + vector[1]**2) for vector in vectors]
+
+angles = []
+for i in range(3):
+    for j in range(i+1, 3):
+        dot_product = vectors[i][0]*vectors[j][0] + vectors[i][1]*vectors[j][1]
+        angle = math.degrees(math.acos(dot_product / (lengths[i] * lengths[j])))
+        angles.append((i, j, angle))
+
+sum_vectors = [(vectors[i][0] + vectors[j][0], vectors[i][1] + vectors[j][1]) 
+               for i in range(3) for j in range(i+1, 3)]
+diff_vectors = [(vectors[i][0] - vectors[j][0], vectors[i][1] - vectors[j][1]) 
+                for i in range(3) for j in range(i+1, 3)]
+
+# Проверяем наличие параллельных векторов
+parallel_lines = False
+for i in range(3):
+    for j in range(i+1, 3):
+        if vectors[i][0]*vectors[j][1] == vectors[i][1]*vectors[j][0]:
+            parallel_lines = True
+            break
+
+print("Длины векторов:", lengths)
+print("Углы между векторами:", angles)
+print("Сумма векторов:", sum_vectors)
+print("Разность векторов:", diff_vectors)
+print("Параллельные векторы:", parallel_lines)
